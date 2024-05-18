@@ -1,10 +1,11 @@
 import './App.css'
+import SeminarHall from './components/SeminarHall'
 
 function App() {
 
   return (
     <>
-        <h3 className='text-2xl'>Hello world</h3>
+      <SeminarHall/>
     </>
   )
 }
