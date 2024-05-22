@@ -1,11 +1,13 @@
 import './App.css'
-import SeminarHall from './components/SeminarHall'
+import Date from './components/Date'
+import Seats from './components/Seats'
 
 function App() {
 
   return (
     <>
-      <SeminarHall/>
+      <Date/>
+      <Seats/>
     </>
   )
 }
