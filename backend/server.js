@@ -1,12 +1,14 @@
 import express from 'express';
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from 'dotenv';
+import userController from './controller/userController.js';
+
+dotenv.config();
 
 const app = express()
 
-const port = process.env.PORT || 5000
+app.use('/', userController);
 
-app.get('/', (req, res) => res.send('welcome to express'))
+const port = process.env.PORT || 5000
 
 app.listen(port, () => {
     console.log(`App started on http://localhost:${port}`)
