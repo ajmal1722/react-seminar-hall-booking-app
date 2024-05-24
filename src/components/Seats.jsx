@@ -1,4 +1,5 @@
 import BookingForm from "./BookingForm";
+import BookingDate from "./Date";
 import { useState } from "react";
 
 const Seats = () => {
@@ -14,7 +15,7 @@ const Seats = () => {
                 </div>
             ))}
             { showForm && 
-                <BookingForm showForm={showForm} setShowForm={setShowForm} />
+                <BookingDate showForm={showForm} setShowForm={setShowForm} />
             }
         </div>
     )
