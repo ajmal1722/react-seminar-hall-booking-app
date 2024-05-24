@@ -1,6 +1,9 @@
-import React from 'react'
+import { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-const Date = () => {
+const BookingDate = () => {
+    const [value, onChange] = useState(new Date())
     return (
         <>
             <div className='text-center mt-20'>   
@@ -8,14 +11,11 @@ const Date = () => {
                     Seminar Hall booking
                 </h1>
             </div>
-            <div className='w-48 mx-auto my-12'>
-                <input 
-                    type="date" 
-                    className='w-48 border rounded-lg p-2'
-                />
+            <div className='flex justify-center my-12'>
+                <Calendar onChange={onChange} value={value} />
             </div>
         </>
     )
 }
 
-export default Date
+export default BookingDate
