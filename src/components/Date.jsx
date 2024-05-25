@@ -26,7 +26,6 @@ const BookingDate = ({setShowForm}) => {
                 </div>
             </div>
         </div>
-
     )
 }
 
