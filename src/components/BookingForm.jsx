@@ -1,8 +1,33 @@
 import React from 'react'
 import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { select_seat } from "../Redux/seats/seatSlice";
 
-const BookingForm = ({ showForm, setShowForm }) => {
+const BookingForm = ({ showForm, setShowForm, selectedSeatIndex }) => {
+    const selectedSeats = useSelector(state => state.selectSeat.value)
+    const dispatch = useDispatch()
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '', 
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(select_seat(selectedSeatIndex))
+        console.log('butoon workkdke..........')
+        setShowForm(false)
+    }
+    console.log('selected Seat:' , selectedSeats)
+    
     return (
         <div className={"fixed inset-0 flex items-center justify-center"}>
             <div className="relative p-4 w-full max-w-md max-h-full">
@@ -29,6 +54,8 @@ const BookingForm = ({ showForm, setShowForm }) => {
                                     type="text"
                                     name="name"
                                     id="name"
+                                    onChange={handleChange}
+                                    value={formData.name}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     required
                                 />
@@ -39,11 +66,14 @@ const BookingForm = ({ showForm, setShowForm }) => {
                                     type="email"
                                     name="email"
                                     id="email"
+                                    onChange={handleChange}
+                                    value={formData.email}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4"
                                     required
                                 />
                             </div>
                             <button
+                                onClick={handleSubmit}
                                 type="submit"
                                 className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                             >

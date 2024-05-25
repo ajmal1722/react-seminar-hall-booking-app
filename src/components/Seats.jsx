@@ -4,16 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { select_seat } from "../Redux/seats/seatSlice";
 
 const Seats = () => {
-    const selectedSeats = useSelector(state => state.selectSeat.value)
-    const dispatch = useDispatch()
+    // getting selected seats from redux store
+    const selectedSeats = useSelector(state => state.selectSeat.value);
 
     const arr = new Array(50).fill(null);
     
     const [showForm, setShowForm] = useState(false);
+    const [selectedSeatIndex, setSelectedSeatIndex] = useState(null)
 
     const handleSeatClick = (index) => {
+        setSelectedSeatIndex(index + 1)
         setShowForm(true)
-        dispatch(select_seat(index + 1))
     }
 
     return (
@@ -24,7 +25,7 @@ const Seats = () => {
                 </div>
             ))}
             { showForm && 
-                <BookingForm showForm={showForm} setShowForm={setShowForm} />
+                <BookingForm showForm={showForm} setShowForm={setShowForm} selectedSeatIndex={selectedSeatIndex} />
             }
         </div>
     )
