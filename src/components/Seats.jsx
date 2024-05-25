@@ -1,17 +1,19 @@
 import BookingForm from "./BookingForm";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { select_seat } from "../Redux/seats/seatSlice";
 
 const Seats = () => {
-    const selectSeat = useSelector(state => state.selectSeat.value)
+    const selectedSeats = useSelector(state => state.selectSeat.value)
+    const dispatch = useDispatch()
+
     const arr = new Array(50).fill(null);
     
     const [showForm, setShowForm] = useState(false);
-    const [selectedSeats, setSelectedSeats] = useState([]);
 
     const handleSeatClick = (index) => {
-        setSelectedSeats((prevSelectedSeats) => [...prevSelectedSeats, index + 1]);
         setShowForm(true)
+        dispatch(select_seat(index + 1))
     }
 
     return (
