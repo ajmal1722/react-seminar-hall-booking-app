@@ -10,6 +10,8 @@ const BookingForm = ({ date, setShowForm, selectedSeatIndex }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '', 
+        date: date,
+        seatIndex: selectedSeatIndex
     })
 
     const handleChange = (e) => {
@@ -22,7 +24,7 @@ const BookingForm = ({ date, setShowForm, selectedSeatIndex }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(select_seat(selectedSeatIndex))
+        dispatch(select_seat(formData))
         setShowForm(false)
     }
     console.log('selected Seat:' , selectedSeats)

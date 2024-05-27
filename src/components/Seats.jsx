@@ -4,8 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { select_seat } from "../Redux/seats/seatSlice";
 
 const Seats = ({ date, startDate, setStartDate}) => {
-    // getting selected seats from redux store
-    const selectedSeats = useSelector(state => state.selectSeat.value);
+    // getting selected seats from redux store using find method
+    const selectedSeatsData = useSelector(state =>
+        state.selectSeat.value.find(entry => entry.date === date)?.seats || []
+    );
+    console.log('selectedSeats:', selectedSeatsData)
 
     const arr = new Array(50).fill(null);
     
@@ -20,7 +23,7 @@ const Seats = ({ date, startDate, setStartDate}) => {
     return (
         <div className='flex flex-wrap justify-center gap-4 mx-auto m-8 sm:w-10/12'>
             {arr.map((val, index) => (
-                <div key={index} onClick={() => handleSeatClick(index)} className={`text-white ${selectedSeats.includes (index + 1) ? 'bg-red-600' : 'bg-green-600'} w-20 py-4 rounded-lg flex justify-center cursor-pointer`}>
+                <div key={index} onClick={() => handleSeatClick(index)} className={`text-white ${selectedSeatsData.includes (index + 1) ? 'bg-red-600' : 'bg-green-600'} w-20 py-4 rounded-lg flex justify-center cursor-pointer`}>
                     {index + 1}
                 </div>
             ))}

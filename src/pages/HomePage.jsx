@@ -12,7 +12,7 @@ const HomePage = () => {
 
     return (
         <>
-            <BookingDate startDate={startDate} setStartDate={setStartDate} />
+            <BookingDate date={date} startDate={startDate} setStartDate={setStartDate} />
             <Seats date={date} startDate={startDate} setStartDate={setStartDate} />
         </>
     )

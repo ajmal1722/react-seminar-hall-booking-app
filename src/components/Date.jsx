@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import ReactDatePicker from 'react-datepicker';
 
 const BookingDate = ({setShowForm}) => {
     const [dateValue, setDateValue] = useState(new Date())
