@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { select_seat } from "../Redux/seats/seatSlice";
 
-const BookingForm = ({ showForm, setShowForm, selectedSeatIndex }) => {
+const BookingForm = ({ date, setShowForm, selectedSeatIndex }) => {
     const selectedSeats = useSelector(state => state.selectSeat.value)
     const dispatch = useDispatch()
 
@@ -23,7 +23,6 @@ const BookingForm = ({ showForm, setShowForm, selectedSeatIndex }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(select_seat(selectedSeatIndex))
-        console.log('butoon workkdke..........')
         setShowForm(false)
     }
     console.log('selected Seat:' , selectedSeats)
@@ -38,7 +37,7 @@ const BookingForm = ({ showForm, setShowForm, selectedSeatIndex }) => {
                         <h3 className="text-lg text-gray-900 dark:text-white">
                             Book your seat on 
                             <span className='text-green-400 mx-2 font-semibold'>
-                                17-02-2003
+                                { date }
                             </span>
                         </h3>
                         <button onClick={() => setShowForm(false)}  type="button" className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">

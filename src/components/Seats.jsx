@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { select_seat } from "../Redux/seats/seatSlice";
 
-const Seats = () => {
+const Seats = ({ date, startDate, setStartDate}) => {
     // getting selected seats from redux store
     const selectedSeats = useSelector(state => state.selectSeat.value);
 
@@ -25,7 +25,7 @@ const Seats = () => {
                 </div>
             ))}
             { showForm && 
-                <BookingForm showForm={showForm} setShowForm={setShowForm} selectedSeatIndex={selectedSeatIndex} />
+                <BookingForm date={date} setShowForm={setShowForm} selectedSeatIndex={selectedSeatIndex} />
             }
         </div>
     )
