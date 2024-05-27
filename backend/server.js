@@ -4,10 +4,14 @@ import path from 'path'
 import userRoutes from './router/userRouter.js';
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import connectDB from './database/connection.js';
 
 dotenv.config();
 
 const app = express()
+
+// Connect to the database
+connectDB();
 
 app.use(cors())
 app.use(bodyParser.json());
