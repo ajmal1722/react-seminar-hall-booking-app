@@ -14,7 +14,7 @@ export const signUp = async (req, res) => {
         // Check if the user already exists
         const existingUser = await User.findOne({ email: userData.email });
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'User already exists in this email' });
         }
 
         // Hash the password
@@ -30,7 +30,7 @@ export const signUp = async (req, res) => {
         res.status(201).json({ message: 'Sign-up successful', user: { email: newUser.email, name: newUser.name } });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error', error });
     }
 }
 

@@ -9,6 +9,8 @@ const SignUp = () => {
         password: '',
     });
 
+    const [error, setError] = useState('');
+
     const onChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
@@ -22,8 +24,15 @@ const SignUp = () => {
         try {
             const response = await axios.post('http://localhost:8000/signUp', formData);
             console.log(response.data);
+            // Clear the form fields
+            setFormData({
+                name: '',
+                email: '',
+                password: '',
+            });
         } catch (error) {
-            console.error("There was an error signing up!", error);
+            console.error("There was an error signing up!", error.response.data);
+            setError(error.response.data.message)
         }
     };
 
@@ -40,6 +49,9 @@ const SignUp = () => {
                         value={formData.name}
                         onChange={onChange}
                     />
+                    <p className="text-red-600">
+                        { error }
+                    </p>
                     <input 
                         name='email'
                         type="email" 
