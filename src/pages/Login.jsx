@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 
@@ -6,18 +6,21 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/login', { email, password });
             console.log(response.data);
-            // Clear the input fields after successful login
-            setEmail('');
-            setPassword('');
+            
+            const { token } = response.data.user;
+            localStorage.setItem('token', token);
+            navigate('/'); // Redirect to home or any other route after login
+
         } catch (error) {
-            setError(error.response.data.message)
             console.error("There was an error logging in!", error);
+            setError(error.response.data.message)
         }
     };
 
