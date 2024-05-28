@@ -1,22 +1,49 @@
 import { NavLink } from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
 
 const Login = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8000/login', { email, password });
+            console.log(response.data);
+            // Clear the input fields after successful login
+            setEmail('');
+            setPassword('');
+        } catch (error) {
+            setError(error.response.data.message)
+            console.error("There was an error logging in!", error);
+        }
+    };
+
     return (
         <div className='flex items-center justify-center pt-12 '>
             <div className="border border-yellow-400 rounded-lg lg:w-1/4 md:w-1/2 w-full m-4 p-6 text-center">
                 <h1 className='text-2xl font-semibold mb-8 mt-2'>Login</h1>
-                <form action="">
+                <form onSubmit={handleSubmit}>
                     <input 
                         name='email'
                         id='email'
                         type="text" 
-                        className='px-4 py-2 border border-gray-300 rounded-lg w-full mb-4 '
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className='px-4 py-2 border border-gray-300 rounded-lg w-full mb-2'
                         placeholder='Your email...'
                     />
+                    <p className="text-red-600 mb-2">
+                        { error }
+                    </p>
                     <input 
                         name='password'
                         id='password'
                         type="password" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className='px-4 py-2 border border-gray-300 rounded-lg w-full mb-2'
                         placeholder='Your password...'
                     />
