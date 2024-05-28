@@ -1,5 +1,6 @@
 import User from '../collections/userModel.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
 export const signUp = async (req, res) => {
     try {
@@ -44,7 +45,14 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid password' });
         }
 
-        res.status(201).json({ message: 'Login successful', user: { name: user.name, email: user.email } });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user._id }, 
+            process.env.JWT_SECRET,
+            { expiresIn: '2h' }
+        )
+
+        res.status(201).json({ message: 'Login successful', user: { name: user.name, email: user.email, token } });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error', error });
